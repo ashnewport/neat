@@ -1,0 +1,123 @@
+@import "node_modules/bourbon-neat/core/neat";
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$grid-breakpoint-sm: 576px;
+$grid-breakpoint-md: 768px;
+$grid-breakpoint-lg: 992px;
+$grid-breakpoint-xl: 1200px;
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-width-sm: 540px;
+$container-max-width-md: 720px;
+$container-max-width-lg: 960px;
+$container-max-width-xl: 1140px;
+
+// Grid media
+// 
+// Define custom grids for use with Neat grid-media mixin.
+$tiny-grid: (
+  columns: 6,
+  gutter: 6px
+);
+
+$small-grid: (
+  columns: 8,
+  gutter: 8px,
+  media: $grid-breakpoint-sm
+);
+
+$medium-grid: (
+  columns: 12,
+  gutter: 12px,
+  media: $grid-breakpoint-md
+);
+
+$large-grid: (
+  columns: 16,
+  gutter: 16px,
+  media: $grid-breakpoint-lg
+);
+
+$huge-grid: (
+  columns: 20,
+  gutter: 20px,
+  media: $grid-breakpoint-xl
+);
+
+$neat-grid: $tiny-grid; // default grid mobile first
+
+* {box-sizing: border-box}
+
+.wrapper {
+  margin: 0 auto;
+
+  @include grid-media($small-grid) {
+    width: $container-max-width-sm;
+  }
+  @include grid-media($medium-grid) {
+    width: $container-max-width-md;
+  }
+  @include grid-media($large-grid) {
+    width: $container-max-width-lg;
+  }
+  @include grid-media($huge-grid) {
+    width: $container-max-width-xl;
+  }
+}
+
+main {
+  @include grid-container;
+  @include grid-visual;
+
+  > div {
+    @include grid-column(3);
+    min-height: 50px;
+    background-color: rgba(123,74,120,.2);
+  }
+}
+
+.nested {
+  @include grid-collapse();
+  @include grid-container();
+  @include grid-visual;
+
+  > div {
+    @include grid-column(1);
+    // help to visualise things
+    min-height: 20px;
+    background-color: rgba(0,0,0,.2);
+  }
+
+  @include grid-media($small-grid) {
+    @include grid-visual;
+    > div {
+      @include grid-column(2);
+    }
+  }
+
+  @include grid-media($medium-grid) {
+    @include grid-visual;
+    > div {
+      @include grid-column(4);
+    }
+  }
+
+  @include grid-media($large-grid) {
+    @include grid-visual;
+    > div {
+      @include grid-column(6);
+    }
+  }
+
+  @include grid-media($huge-grid) {
+    @include grid-visual;
+    > div {
+      @include grid-column(8);
+    }
+  }
+}

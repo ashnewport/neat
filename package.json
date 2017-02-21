@@ -1,0 +1,14 @@
+{
+  "name": "neat",
+  "license": "MIT",
+  "author": "ashnewport",
+  "scripts": {
+    "build-scss": "node-sass --include-path scss app/scss/app.scss public/css/app.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-scss\""
+  },
+  "devDependencies": {
+    "bourbon-neat": "^2.0.0",
+    "node-sass": "^4.5.0",
+    "nodemon": "^1.11.0"
+  }
+}
